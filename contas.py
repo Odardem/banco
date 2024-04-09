@@ -19,19 +19,22 @@ Escolha uma opção
 
 def saque(valor):
     global saldo, limite
-    if valor <= saldo:
-        if len(saques) < LIMITE_SAQUE_DIARIO:
-            if valor <= limite:
-                saldo -= valor
-                saques.append(valor)
-                operacoes.append(f'Saque no valor de R$ {valor:.2f}\n')
-                return print("\nSaque efetuado com sucesso\n")
+    if valor > 0:
+        if valor <= saldo:
+            if len(saques) < LIMITE_SAQUE_DIARIO:
+                if valor <= limite:
+                    saldo -= valor
+                    saques.append(valor)
+                    operacoes.append(f'Saque no valor de R$ {valor:.2f}\n')
+                    return print("\nSaque efetuado com sucesso\n")
+                else:
+                    return print("\nLimite do valor de saque atingido\n")
             else:
-                return print("\nLimite do valor de saque atingido\n")
-        else:
-            return print("\nLimite de saques diarios atingido \n")
-    else: 
-        return print("\nNão foi possivel efetuar o saque\n")
+                return print("\nLimite de saques diarios atingido \n")
+        else: 
+            return print("\nNão foi possivel efetuar o saque\n")
+    else:
+        return print("Valor informado é invalido\n")
     
 
 def deposito(valor):
@@ -41,6 +44,8 @@ def deposito(valor):
         depositos.append(saldo)
         operacoes.append(f'Deposito no valor de R$ {valor:.2f}\n')
         return print("\nDeposito efetuado com sucesso\n")
+    else:
+        return print('Valor informado é invalido')
 
 def extrato():
     global saldo
