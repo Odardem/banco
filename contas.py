@@ -1,11 +1,7 @@
-
 saldo :float = 0
 limite = 500
 LIMITE_SAQUE_DIARIO = 3
-saques = []
-depositos = []
 operacoes = []
-#extrato = {"Extrato": saques, "Deposito": depositos}
 
 menu = """
 Escolha uma opção
@@ -14,7 +10,6 @@ Escolha uma opção
 [s] Sacar
 [e] Extrato
 [s] Sair
-
 """
 
 def saque(valor):
@@ -24,7 +19,6 @@ def saque(valor):
             if len(saques) < LIMITE_SAQUE_DIARIO:
                 if valor <= limite:
                     saldo -= valor
-                    saques.append(valor)
                     operacoes.append(f'Saque no valor de R$ {valor:.2f}\n')
                     return print("\nSaque efetuado com sucesso\n")
                 else:
@@ -41,7 +35,6 @@ def deposito(valor):
     global saldo
     if valor > 0:
         saldo += valor
-        depositos.append(saldo)
         operacoes.append(f'Deposito no valor de R$ {valor:.2f}\n')
         return print("\nDeposito efetuado com sucesso\n")
     else:
@@ -52,8 +45,7 @@ def extrato():
     texto = '\n'
     for a in operacoes:
         texto += a
-    texto += f'__________________\n'
-    texto += f'O saldo Total é: R$ {saldo:.2f}\n'
+    texto += f'__________________\nO saldo Total é: R$ {saldo:.2f}\n'
     return print(texto)
 
 while True:
