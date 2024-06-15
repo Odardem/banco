@@ -2,7 +2,7 @@ saldo :float = 0
 limite = 500
 LIMITE_SAQUE_DIARIO = 3
 operacoes = []
-
+saques = 0
 menu = """
 Escolha uma opção
 
@@ -10,13 +10,15 @@ Escolha uma opção
 [s] Sacar
 [e] Extrato
 [s] Sair
+
 """
 
 def saque(valor):
-    global saldo, limite
+    global saldo, limite, saques
     if valor > 0:
         if valor <= saldo:
-            if len(saques) < LIMITE_SAQUE_DIARIO:
+            saques +=1
+            if saques <= LIMITE_SAQUE_DIARIO:
                 if valor <= limite:
                     saldo -= valor
                     operacoes.append(f'Saque no valor de R$ {valor:.2f}\n')
@@ -26,10 +28,9 @@ def saque(valor):
             else:
                 return print("\nLimite de saques diarios atingido \n")
         else: 
-            return print("\nNão foi possivel efetuar o saque\n")
+            return print("\nNão foi possivel efetuar o saque, saldo insuficiente\n")
     else:
-        return print("Valor informado é invalido\n")
-    
+        return print("Valor informado é invalido\n")    
 
 def deposito(valor):
     global saldo
